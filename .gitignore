@@ -1,3 +1,4 @@
 .vscode
 web/trees.*
-src/trees.*
+src/trees.js
+src/trees.wasm
