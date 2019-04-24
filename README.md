@@ -1,5 +1,7 @@
 # WebAssembly Fractals
 
+[![Build Status](https://jeremylikness.visualstudio.com/wasm-trees/_apis/build/status/JeremyLikness.wasm-trees?branchName=master)](https://jeremylikness.visualstudio.com/wasm-trees/_build/latest?definitionId=10&branchName=master)
+
 This repo contains C code that compiles to WebAssembly. It generates various graphics using pre-determined parameters for "The Chaos Game." There is a mode to distort that randomly "nudges" the parameters to produce new results.
 
 The intent of the project is to demonstrate how to share memory between JavaScript and Wasm code. A buffer is allocated in JavaScript and passed to WebAssembly, and WebAssembly renders to a buffer that is passed back.
