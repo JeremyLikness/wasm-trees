@@ -10,10 +10,20 @@ pool:
   vmImage: 'Ubuntu-16.04'
 
 steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+- task: DockerInstaller@0
+  inputs:
+    dockerVersion: '17.09.0-ce'
+
+- script: docker run -it --rm -v $(pwd)/src:/src trzeci/emscripten emcc trees.c -O2 -s WASM=1 -s EXPORTED_FUNCTIONS=['_renderTree', '_getAddresses']  -s EXTRA_EXPORTED_RUNTIME_METHODS=['ccall', 'cwrap'] -o trees.js -s ALLOW_MEMORY_GROWTH=1
+  displayName: 'Build WebAssembly assets'
+
+- script: cp web/* $(Build.ArtifactStagingDirectory)
+  displayName: 'Copy web contents'
+
+- script: cp trees.js $(Build.ArtifactStagingDirectory)
+  displayName: 'Copy JavaScript loader'
+
+- script: cp trees.wasm $(Build.ArtifactStagingDirectory)
+  displayName: 'Copy Wasm'
+  
