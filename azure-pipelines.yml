@@ -15,14 +15,8 @@ steps:
   inputs:
     dockerVersion: '17.09.0-ce'
 
-- script: docker run -i --rm -v $(pwd):/src trzeci/emscripten ls -al
-  displayName: 'Verify docker mount'
-
-- script: docker run -i --rm -v $(pwd):/src trzeci/emscripten emcc src/trees.c -O2 -s WASM=1 -s EXPORTED_FUNCTIONS=['_renderTree', '_getAddresses']  -s EXTRA_EXPORTED_RUNTIME_METHODS=['ccall', 'cwrap'] -o trees.js -s ALLOW_MEMORY_GROWTH=1
+- script: docker run -i --rm -v $(pwd):/src trzeci/emscripten emcc src/trees.c -O2 -s WASM=1 -s EXPORTED_FUNCTIONS="['_renderTree', '_getAddresses']"  -s EXTRA_EXPORTED_RUNTIME_METHODS="['ccall', 'cwrap']" -o trees.js -s ALLOW_MEMORY_GROWTH=1
   displayName: 'Build WebAssembly assets'
-
-- script: ls -al 
-  displayName: 'Verify output assets'
 
 - script: cp web/* $(Build.ArtifactStagingDirectory)
   displayName: 'Copy web contents'
