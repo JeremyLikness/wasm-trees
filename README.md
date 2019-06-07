@@ -6,6 +6,8 @@
 
 This repo contains C code that compiles to WebAssembly. It generates various graphics using pre-determined parameters for "The Chaos Game." There is a mode to distort that randomly "nudges" the parameters to produce new results.
 
+> This repository is continuously built and deployed using free Azure Pipelines. If you're interested in how it was setup and configured to build automatically and deploy to low cost Azure Storage Static Websites, read [Deploy WebAssembly from GitHub to Azure Storage Static Websites with Azure Pipelines](https://jlik.me/fzi).
+
 The intent of the project is to demonstrate how to share memory between JavaScript and Wasm code. A buffer is allocated in JavaScript and passed to WebAssembly, and WebAssembly renders to a buffer that is passed back.
 
 Two helper scripts, one for Windows and one for Bash environments, are included. They use a pre-configured Docker file to compile the WebAssembly. They are intended to be run from the `src` directory and will copy the generated assets into `web`.
